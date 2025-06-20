@@ -9,9 +9,10 @@ import java.util.List;
 @Service
 public class OrderService {
 
-//    Using JDBC Template to interact with the database
-    private  final JdbcTemplate jdbc;
+    //    Using JDBC Template to interact with the database
+    private final JdbcTemplate jdbc;
     String query = "";
+
     public OrderService(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
@@ -22,16 +23,18 @@ public class OrderService {
         return jdbc.query(query, new BeanPropertyRowMapper<>(Orders.class));
     }
 
-//   Add a new order
+    //   Add a new order
     public int addOrder(Orders order) {
-        query = "INSERT INTO orders (orderName, orderPrice) VALUES (?, ?)";
-        return jdbc.update(query, order.getOrderName(), order.getOrderPrice());
+        String query = "INSERT INTO orders (\"id\", \"orderName\", \"orderPrice\") VALUES (?, ?, ?)";
+        return jdbc.update(query, order.getId(), order.getOrderName(), order.getOrderPrice());
     }
 
-//   Update an existing order
+
+    //   Update an existing order
     public int updateOrder(Orders order) {
-        query = "UPDATE orders SET orderName = ?, orderPrice = ? WHERE id = ?";
+        String query = "UPDATE orders SET \"orderName\" = ?, \"orderPrice\" = ? WHERE \"id\" = ?";
         return jdbc.update(query, order.getOrderName(), order.getOrderPrice(), order.getId());
     }
+
 
 }
