@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: postgres_C1220027
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ismail
+      POSTGRES_PASSWORD: ismail
+      POSTGRES_DB: OrdersDB
+    ports:
+      - "5432:5432"
+  pgadmin:
+    container_name: pgadmin4_C1220027
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ismail@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: ismail
+    ports:
+      - "5050:80"
